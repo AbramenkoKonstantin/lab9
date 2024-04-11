@@ -9,6 +9,7 @@ import java.time.Duration;
 
 public class MainClass {
 
+    //Mail.ru
     @Test
     public void FirstTest(){
         System.setProperty("webdriver.chrome.driver",
@@ -16,9 +17,8 @@ public class MainClass {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(options);
-        driver.get("https://account.mail.ru/login?page=https%3A%2F%2Fe.mail.ru%2Fmessages%2Finbox%3Futm_source%3Dportal%26utm_medium%3Dportal_navigation_under_search_exp%26utm_campaign%3De.mail.ru%26mt_sub5%3D14251%26mt_sub1%3Dmail.ru%26mt_click_id%3Dmt-jlsxn4-1711877173-548646412&allow_external=1");
+        driver.get("https://account.mail.ru/login");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        //Assert.assertEquals(driver.findElement(By.xpath("//*[@class='input-0-2-77']")), driver.switchTo().activeElement());
         driver.findElement(By.xpath("//*[@class='input-0-2-77']")).sendKeys("testforlab9");
         driver.findElement(By.xpath("//*[@class='inner-0-2-89 innerTextWrapper-0-2-90']")).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -31,12 +31,13 @@ public class MainClass {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.xpath("//*[@data-testid='whiteline-account-exit']")).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.findElement(By.xpath("//*[@class='resplash-btn resplash-btn_outlined-themed resplash-btn_mailbox-big mfflmpk__b85yax']")).isDisplayed();
+        driver.findElement(By.xpath("//*[@class='resplash-btn resplash-btn_outlined-themed resplash-btn_mailbox-big ejf-iekc__1jdtl7f']")).isDisplayed();
 
-        
-        //driver.quit();
+
+        driver.quit();
     }
 
+    //Habr.com
     @Test
     public void SecondTest() {
         System.setProperty("webdriver.chrome.driver",
@@ -44,10 +45,21 @@ public class MainClass {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(options);
-        driver.get("https://habr.com/ru/search/");
+        driver.get("https://habr.com/ru/all/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@class='tm-input-text-decorated__input']")), driver.switchTo().activeElement());
-        driver.findElement(By.xpath("//*[@class='tm-input-text-decorated__input']")).sendKeys("professionaltester");
+        driver.findElement(By.xpath("//*[@class='tm-svg-img tm-header-user-menu__icon tm-header-user-menu__icon_search tm-header-user-menu__icon_dark']")).click();
+        driver.findElement(By.xpath("//*[@class='tm-input-text-decorated__input']")).sendKeys("Selenium WebDriver");
+        driver.findElement(By.xpath("//*[@class='tm-svg-img tm-svg-icon']")).click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.findElement(By.linkText("Что такое Selenium?")).click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Assert.assertEquals("28 сен 2012 в 16:14", driver.findElement(By.xpath("//*[@title='2012-09-28, 16:14']")).getText());
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.findElement(By.xpath("//a[@href='/ru/articles/' and @class='footer-menu__item-link router-link-active']")).click();
+
+        driver.quit();
     }
 
 }
